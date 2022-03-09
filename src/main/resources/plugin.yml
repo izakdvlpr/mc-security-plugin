@@ -4,6 +4,6 @@ main: com.izakdvlpr.loginsecurity.LoginSecurityMain
 author: izakdvlpr
 commands:
   login:
-    aliases: lg
+    aliases: ["logar"]
   register:
-    aliases: rg
+    aliases: ["registrar"]
