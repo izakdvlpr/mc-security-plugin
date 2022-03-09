@@ -1,7 +1,9 @@
 package com.izakdvlpr.loginsecurity;
 
 import com.izakdvlpr.loginsecurity.managers.DatabaseManager;
+import com.izakdvlpr.loginsecurity.managers.CommandsManager;
 
+import com.izakdvlpr.loginsecurity.managers.ListenersManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -20,6 +22,8 @@ public class LoginSecurityMain extends JavaPlugin {
     if (!(new File(getDataFolder(), "config.yml")).exists()) saveDefaultConfig();
 
     new DatabaseManager(this);
+    new ListenersManager(this);
+    new CommandsManager(this);
   }
 
   @Override
