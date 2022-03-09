@@ -1,0 +1,9 @@
+name: LoginSecurity
+version: '${project.version}'
+main: com.izakdvlpr.loginsecurity.LoginSecurityMain
+author: izakdvlpr
+commands:
+  login:
+    aliases: lg
+  register:
+    aliases: rg
