@@ -2,6 +2,7 @@ name: LoginSecurity
 version: '${project.version}'
 main: com.izakdvlpr.loginsecurity.LoginSecurityMain
 author: izakdvlpr
+depend: [TitleAPI]
 commands:
   login:
     aliases: ["logar"]
