@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
     for (byte b1 = 0; b1 < 100; b1++)
       player.sendMessage("");
 
-    boolean isCreatedUser = UserRepository.findUserByUUID(player.getUniqueId().toString());
+    boolean isCreatedUser = UserRepository.verifyUser(player.getUniqueId().toString());
 
     if (!isCreatedUser) {
       TitleAPI.sendTitle(player, "§e§lBem-Vindo!", "§fUtilize /registrar <senha> <senha>", 20, 2000, 20);

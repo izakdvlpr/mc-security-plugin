@@ -11,7 +11,6 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
@@ -19,7 +18,7 @@ import java.util.Objects;
 public class RegisterCommand implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    if (!(sender instanceof Player) || !(sender instanceof ConsoleCommandSender)) {
+    if (!(sender instanceof Player)) {
       sender.sendMessage("§cComando apenas para jogadores dentro do jogo!");
 
       return true;
@@ -28,7 +27,7 @@ public class RegisterCommand implements CommandExecutor {
     Player player = (Player) sender;
     String uuid = player.getUniqueId().toString();
 
-    boolean userAlreadyCreated = UserRepository.findUserByUUID(uuid);
+    boolean userAlreadyCreated = UserRepository.verifyUser(uuid);
 
     if (userAlreadyCreated) {
       sender.sendMessage("§cVocê já está registrado!");
@@ -50,7 +49,7 @@ public class RegisterCommand implements CommandExecutor {
     }
 
     if (!(args.length == 2)) {
-      sender.sendMessage("§eFalta argumentos! /registrar <senha> <senha");
+      sender.sendMessage("§eFalta argumentos! /registrar <senha> <senha>");
 
       player.playSound(player.getLocation(), Sound.VILLAGER_NO, 1.0F, 0.5F);
 
@@ -77,7 +76,7 @@ public class RegisterCommand implements CommandExecutor {
     }
 
     String nickname = player.getName();
-    String encryptedPassword = PasswordHelper.encrypt(password);
+    String encryptedPassword = PasswordHelper.generate(password);
 
     IpRepository.addIp(ip);
     UserRepository.createUser(uuid, nickname, encryptedPassword);

@@ -5,6 +5,7 @@ import com.izakdvlpr.loginsecurity.managers.DatabaseManager;
 import org.bukkit.Bukkit;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 
@@ -47,17 +48,33 @@ public class UserRepository {
     }
   }
 
-  public static boolean findUserByUUID(String uuid) {
+  public static boolean verifyUser(String uuid) {
     try {
       PreparedStatement preparedStatement = connection().prepareStatement("SELECT * FROM users WHERE uuid='" + uuid + "';");
 
       return preparedStatement.executeQuery().next();
+    } catch (SQLException e) {
+      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] An error occurred while verifying the user.");
+
+      e.printStackTrace();
+    }
+
+    return false;
+  }
+
+  public static String getUserPassword(String uuid) {
+    try {
+      PreparedStatement preparedStatement = connection().prepareStatement("SELECT * FROM users WHERE uuid='" + uuid + "';");
+      ResultSet resultSet;
+
+      if ((resultSet = preparedStatement.executeQuery()).next())
+        return resultSet.getString("password");
     } catch (SQLException e) {
       Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] There was an error getting the user.");
 
       e.printStackTrace();
     }
 
-    return false;
+    return null;
   }
 }
