@@ -28,13 +28,13 @@ public class DatabaseManager {
     try {
       connection = DriverManager.getConnection(url, user, password);
 
-      Bukkit.getConsoleSender().sendMessage("§a[LoginPlugin/MySQL] SUCCESS connecting to MySQL.");
+      Bukkit.getConsoleSender().sendMessage("§a[LoginSecurity/MySQL] Success connecting to MySQL.");
     } catch (SQLException e) {
-      Bukkit.getConsoleSender().sendMessage("§c[LoginPlugin/MySQL] Failed to Connect to MySQL!");
+      Bukkit.getConsoleSender().sendMessage("§c[LoginSecurity/MySQL] Failed to Connect to MySQL!");
 
-      Bukkit.getConsoleSender().sendMessage("§4[LoginPlugin-MySQL] You need connect to MySQL.");
-      Bukkit.getConsoleSender().sendMessage("§4[LoginPlugin/MySQL] You need connect to MySQL.");
-      Bukkit.getConsoleSender().sendMessage("§4[LoginPlugin/MySQL] You need connect to MySQL.");
+      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity-MySQL] You need connect to MySQL.");
+      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] You need connect to MySQL.");
+      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] You need connect to MySQL.");
 
       e.printStackTrace();
     }
@@ -45,10 +45,14 @@ public class DatabaseManager {
       if (!connection.isClosed()) {
         connection.close();
 
-        Bukkit.getConsoleSender().sendMessage("§6[LoginPlugin/MySQL] SUCCESS while Disconnecting to MySQL!");
+        Bukkit.getConsoleSender().sendMessage("§6[LoginSecurity/MySQL] SUCCESS while Disconnecting to MySQL!");
       }
     } catch(Exception exception) {
-      Bukkit.getConsoleSender().sendMessage("§c[LoginPlugin/MySQL] Failed to Disconnect to MySQL!");
+      Bukkit.getConsoleSender().sendMessage("§c[LoginSecurity/MySQL] Failed to Disconnect to MySQL!");
     }
+  }
+
+  public static Connection getConnection(){
+    return connection;
   }
 }
