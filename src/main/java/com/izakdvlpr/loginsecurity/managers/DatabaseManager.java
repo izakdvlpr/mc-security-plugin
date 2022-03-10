@@ -12,12 +12,12 @@ public class DatabaseManager {
   private static Connection connection;
 
   public DatabaseManager(LoginSecurityMain main) {
-    String host = main.getConfig().getString("MySQL.host");
-    String port = Integer.toString(main.getConfig().getInt("MySQL.port"));
-    String database = main.getConfig().getString("MySQL.database");
+    String host = main.getConfig().getString("mysql.host");
+    String port = Integer.toString(main.getConfig().getInt("mysql.port"));
+    String database = main.getConfig().getString("mysql.database");
     String url = "jdbc:mysql://" + host + ":" + port + "/" + database + "?characterEncoding=latin1&useConfigs=maxPerformance";
-    String user =  main.getConfig().getString("MySQL.user");
-    String password = main.getConfig().getString("MySQL.password");
+    String user =  main.getConfig().getString("mysql.user");
+    String password = main.getConfig().getString("mysql.password");
 
     try {
       Class.forName("com.mysql.jdbc.Driver");
