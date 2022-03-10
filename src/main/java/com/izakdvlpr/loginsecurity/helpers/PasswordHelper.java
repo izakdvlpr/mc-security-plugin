@@ -1,27 +1,33 @@
 package com.izakdvlpr.loginsecurity.helpers;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordHelper {
-  public static String encrypt(String password) {
-    byte[] arrayOfByte = {};
+  public static Boolean verify(String password) {
+    return password.matches("^.{8,}$");
+  }
 
-    try {
-      arrayOfByte = MessageDigest.getInstance("MD5").digest(password.getBytes(StandardCharsets.UTF_8));
-    } catch (NoSuchAlgorithmException e) {
-      e.printStackTrace();
+  private static String encrypt(String password) {
+    int hashSalt = 10;
+
+    return BCrypt.hashpw(password, BCrypt.gensalt(hashSalt));
+  }
+
+  private static String castPassword(String password) {
+    if (!verify(password)) {
+      throw new Error();
     }
 
-    StringBuilder stringBuilder = new StringBuilder();
+    return password;
+  }
 
-    byte b = 0;
-    while (b < arrayOfByte.length) {
-      stringBuilder.append(String.format("%02X", 0xFF & arrayOfByte[b]));
-      b++;
-    }
+  public static String generate(String password) {
+    String makePassword = castPassword(password);
 
-    return stringBuilder.toString();
+    return encrypt(makePassword);
+  }
+
+  public static boolean compare(String password, String passwordHash) {
+    return BCrypt.checkpw(password, passwordHash);
   }
 }
