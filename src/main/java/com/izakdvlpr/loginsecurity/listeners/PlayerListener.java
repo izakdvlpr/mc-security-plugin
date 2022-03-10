@@ -27,17 +27,19 @@ public class PlayerListener implements Listener {
     for (byte b1 = 0; b1 < 100; b1++)
       player.sendMessage("");
 
-    boolean isUser = UserRepository.hasUser(player.getUniqueId().toString());
+    boolean isCreatedUser = UserRepository.findUserByUUID(player.getUniqueId().toString());
 
-    if (!isUser) {
-      TitleAPI.sendTitle(player, "§e§lBem-Vindo!", "§c/registar <senha> <senha>", 20, 2000, 20);
-      player.sendMessage("§cBem-Vindo! /registar <senha> <senha>");
+    if (!isCreatedUser) {
+      TitleAPI.sendTitle(player, "§e§lBem-Vindo!", "§fUtilize /registrar <senha> <senha>", 20, 2000, 20);
+
+      player.sendMessage("§cBem-Vindo! Utilize /registrar <senha> <senha>");
 
       return;
     }
 
-    TitleAPI.sendTitle(player, "§e§lBem-Vindo!", "§a/login <senha>", 20, 2000, 20);
-    player.sendMessage("§aBem-Vindo! /login <senha>");
+    TitleAPI.sendTitle(player, "§e§lBem-Vindo!", "§aUtilize /login <senha>", 20, 2000, 20);
+
+    player.sendMessage("§aBem-Vindo! Utilize /login <senha>");
   }
 
   @EventHandler
