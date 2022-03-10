@@ -4,6 +4,7 @@ import com.izakdvlpr.loginsecurity.managers.DatabaseManager;
 import com.izakdvlpr.loginsecurity.managers.CommandsManager;
 import com.izakdvlpr.loginsecurity.managers.ListenersManager;
 
+import com.izakdvlpr.loginsecurity.repositories.IpRepository;
 import com.izakdvlpr.loginsecurity.repositories.UserRepository;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,6 +29,7 @@ public class LoginSecurityMain extends JavaPlugin {
     new DatabaseManager(this);
 
     UserRepository.createUserTable();
+    IpRepository.createIpTable();
 
     new ListenersManager(this);
     new CommandsManager(this);
