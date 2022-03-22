@@ -33,7 +33,7 @@ public class VerifyCommand implements CommandExecutor {
     boolean codeAlreadyCreated = CodeRepository.verifyCodeByUserId(userId);
 
     if (!codeAlreadyCreated) {
-      sender.sendMessage("§dVocê não possui um pedido de verificação. Use /email <seuemail> para pedir.");
+      sender.sendMessage("§dVocê não possui um pedido de verificação. Use /email <seu email> para pedir.");
 
       return true;
     }
