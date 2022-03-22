@@ -63,6 +63,7 @@ public class UserRepository {
           resultSet.getString("password"),
           resultSet.getString("email"),
           resultSet.getInt("verify"),
+          resultSet.getInt("prime"),
           resultSet.getString("discord_id"),
           resultSet.getString("created_at")
         );

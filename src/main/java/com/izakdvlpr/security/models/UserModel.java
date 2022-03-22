@@ -6,15 +6,26 @@ public class UserModel {
   public String password;
   public String email;
   public Integer verify;
+  public Integer prime;
   public String discord_id;
   public String created_at;
 
-  public void setData(String id, String nickname, String password, String email, Integer verify, String discord_id, String created_at) {
+  public void setData(
+    String id,
+    String nickname,
+    String password,
+    String email,
+    Integer verify,
+    Integer prime,
+    String discord_id,
+    String created_at
+  ) {
     this.id = id;
     this.nickname = nickname;
     this.password = password;
     this.email = email;
     this.verify = verify;
+    this.prime = prime;
     this.discord_id = discord_id;
     this.created_at = created_at;
   }

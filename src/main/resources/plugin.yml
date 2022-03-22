@@ -12,3 +12,5 @@ commands:
     aliases: ["mail"]
   verify:
     aliases: ["verificar"]
+  prime:
+    aliases: ["celular"]
