@@ -1,6 +1,6 @@
-package com.izakdvlpr.loginsecurity.repositories;
+package com.izakdvlpr.security.repositories;
 
-import com.izakdvlpr.loginsecurity.managers.DatabaseManager;
+import com.izakdvlpr.security.managers.DatabaseManager;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class IpRepository {
     try {
       connection().createStatement().execute("CREATE TABLE IF NOT EXISTS ips (ip VARCHAR(255) NOT NULL);");
     } catch (SQLException e) {
-      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] Error creating user table.");
+      Bukkit.getConsoleSender().sendMessage("§4[ZKSecurity/MySQL] Error creating ip table.");
 
       e.printStackTrace();
     }
@@ -29,7 +29,7 @@ public class IpRepository {
       preparedStatement.setString(1, ip);
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
-      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] There was an error adding the user's ip..");
+      Bukkit.getConsoleSender().sendMessage("§4[ZKSecurity/MySQL] There was an error adding the user's ip.");
 
       e.printStackTrace();
     }
@@ -37,11 +37,11 @@ public class IpRepository {
 
   public static boolean findIp(String ip) {
     try {
-      PreparedStatement preparedStatement = connection().prepareStatement("SELECT * FROM ips WHERE ip='" + ip + "';");
+      PreparedStatement preparedStatement = connection().prepareStatement("SELECT ip FROM ips WHERE ip='" + ip + "';");
 
       return preparedStatement.executeQuery().next();
     } catch (SQLException e) {
-      Bukkit.getConsoleSender().sendMessage("§4[LoginSecurity/MySQL] There was an error getting the ip.");
+      Bukkit.getConsoleSender().sendMessage("§4[ZKSecurity/MySQL] There was an error getting the ip.");
 
       e.printStackTrace();
     }

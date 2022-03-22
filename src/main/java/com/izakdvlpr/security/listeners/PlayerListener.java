@@ -1,7 +1,7 @@
-package com.izakdvlpr.loginsecurity.listeners;
+package com.izakdvlpr.security.listeners;
 
-import com.izakdvlpr.loginsecurity.LoginSecurityMain;
-import com.izakdvlpr.loginsecurity.repositories.UserRepository;
+import com.izakdvlpr.security.ZKSecurityMain;
+import com.izakdvlpr.security.repositories.UserRepository;
 
 import com.connorlinfoot.titleapi.TitleAPI;
 
@@ -46,14 +46,14 @@ public class PlayerListener implements Listener {
   public void onPlayerQuitEvent(PlayerQuitEvent event) {
     Player player = event.getPlayer();
 
-    LoginSecurityMain.usersLogged.remove(player.getName());
+    ZKSecurityMain.usersLogged.remove(player.getName());
   }
 
   @EventHandler
   public void onPlayerMoveEvent(PlayerMoveEvent event) {
     Player player = event.getPlayer();
 
-    if (!LoginSecurityMain.usersLogged.contains(player.getName())) {
+    if (!ZKSecurityMain.usersLogged.contains(player.getName())) {
       event.setCancelled(true);
 
       player.teleport(player.getLocation());

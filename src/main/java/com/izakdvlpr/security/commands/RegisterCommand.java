@@ -1,11 +1,11 @@
-package com.izakdvlpr.loginsecurity.commands;
+package com.izakdvlpr.security.commands;
 
 import com.connorlinfoot.titleapi.TitleAPI;
 
-import com.izakdvlpr.loginsecurity.LoginSecurityMain;
-import com.izakdvlpr.loginsecurity.helpers.PasswordHelper;
-import com.izakdvlpr.loginsecurity.repositories.IpRepository;
-import com.izakdvlpr.loginsecurity.repositories.UserRepository;
+import com.izakdvlpr.security.repositories.IpRepository;
+import com.izakdvlpr.security.ZKSecurityMain;
+import com.izakdvlpr.security.helpers.BCryptHelper;
+import com.izakdvlpr.security.repositories.UserRepository;
 
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -25,9 +25,9 @@ public class RegisterCommand implements CommandExecutor {
     }
 
     Player player = (Player) sender;
-    String uuid = player.getUniqueId().toString();
+    String userId = player.getUniqueId().toString();
 
-    boolean userAlreadyCreated = UserRepository.verifyUser(uuid);
+    boolean userAlreadyCreated = UserRepository.verifyUser(userId);
 
     if (userAlreadyCreated) {
       sender.sendMessage("§cVocê já está registrado!");
@@ -76,12 +76,12 @@ public class RegisterCommand implements CommandExecutor {
     }
 
     String nickname = player.getName();
-    String encryptedPassword = PasswordHelper.generate(password);
+    String encryptedPassword = BCryptHelper.generate(password, 10);
 
     IpRepository.addIp(ip);
-    UserRepository.createUser(uuid, nickname, encryptedPassword);
+    UserRepository.createUser(userId, nickname, encryptedPassword);
 
-    LoginSecurityMain.usersLogged.add(player.getName());
+    ZKSecurityMain.usersLogged.add(player.getName());
 
     player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 0.5F);
 

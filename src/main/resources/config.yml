@@ -1,7 +1,18 @@
 mysql:
-  host: 'localhost'
+  host: "localhost"
   port: 3306
-  database: 'login_plugin'
-  user: 'sqluser'
-  password: 'password'
+  database: "login_plugin"
+  user: "sqluser"
+  password: "password"
+smtp:
+  auth:
+    user: c8a42c9a20d813
+    pass: ace58cc170d472
+  driver:
+    host: "smtp.mailtrap.io"
+    port: 2525
+    auth: true
+    tls: true
 messages:
+  commands:
+  listeners:

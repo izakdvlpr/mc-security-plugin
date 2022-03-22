@@ -1,10 +1,10 @@
-package com.izakdvlpr.loginsecurity.commands;
+package com.izakdvlpr.security.commands;
 
 import com.connorlinfoot.titleapi.TitleAPI;
-import com.izakdvlpr.loginsecurity.LoginSecurityMain;
+import com.izakdvlpr.security.ZKSecurityMain;
 
-import com.izakdvlpr.loginsecurity.helpers.PasswordHelper;
-import com.izakdvlpr.loginsecurity.repositories.UserRepository;
+import com.izakdvlpr.security.helpers.BCryptHelper;
+import com.izakdvlpr.security.repositories.UserRepository;
 
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -12,12 +12,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 // TO DO:
-// verificar se a senha é a mesma do banco; msg
-// adicionar 3 tentativas de erro; msg/kick
 // verificar se já tem um usuário online; kick
 
 public class LoginCommand implements CommandExecutor {
@@ -32,9 +29,9 @@ public class LoginCommand implements CommandExecutor {
     }
 
     Player player = (Player) sender;
-    String uuid = player.getUniqueId().toString();
+    String userId = player.getUniqueId().toString();
 
-    boolean userAlreadyNotCreated = UserRepository.verifyUser(uuid);
+    boolean userAlreadyNotCreated = UserRepository.verifyUser(userId);
 
     if (!userAlreadyNotCreated) {
       sender.sendMessage("§cVocê precisa se registrar primeiro!");
@@ -44,7 +41,7 @@ public class LoginCommand implements CommandExecutor {
       return true;
     }
 
-    boolean userAlreadyLogged = LoginSecurityMain.usersLogged.contains(player.getName());
+    boolean userAlreadyLogged = ZKSecurityMain.usersLogged.contains(player.getName());
 
     if (userAlreadyLogged) {
       sender.sendMessage("§eVocê já está logado!");
@@ -63,9 +60,9 @@ public class LoginCommand implements CommandExecutor {
     }
 
     String password = args[0];
-    String userPassword = UserRepository.getUserPassword(uuid);
+    String userPassword = UserRepository.getUserPassword(userId);
 
-    boolean verifyPassword = PasswordHelper.compare(password, userPassword);
+    boolean verifyPassword = BCryptHelper.compare(password, userPassword);
 
     int LIMIT_COUNT = 2;
 
@@ -91,7 +88,7 @@ public class LoginCommand implements CommandExecutor {
       return true;
     }
 
-    LoginSecurityMain.usersLogged.add(player.getName());
+    ZKSecurityMain.usersLogged.add(player.getName());
 
     player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 0.5F);
 

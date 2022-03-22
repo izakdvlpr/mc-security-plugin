@@ -1,6 +1,6 @@
-name: LoginSecurity
+name: ZKSecurity
 version: '${project.version}'
-main: com.izakdvlpr.loginsecurity.LoginSecurityMain
+main: com.izakdvlpr.security.ZKSecurityMain
 author: izakdvlpr
 depend: [TitleAPI]
 commands:
@@ -8,3 +8,7 @@ commands:
     aliases: ["logar"]
   register:
     aliases: ["registrar"]
+  email:
+    aliases: ["mail"]
+  verify:
+    aliases: ["verificar"]
