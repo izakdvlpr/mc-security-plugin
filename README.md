@@ -1,3 +1,3 @@
-# login-security-plugin
+# mc-security-plugin
 
-👁 Plugin with security options for your Minecraft Server.
+Plugin with security options for your Minecraft Server.
